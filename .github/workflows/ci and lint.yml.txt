@@ -1,0 +1,42 @@
+name:  CI Pipeline and Lint Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  run-script:
+    name: Run Script
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Give permission to run.sh
+        run: chmod +x ./run.sh
+
+      - name: Execute run.sh
+        run: ./run.sh
+
+  lint-and-test:
+    name: Lint and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run lint
+        run: npm run lint
+
+      - name: Run tests
+        run: npm test

@@ -1,2 +1,0 @@
-#!/bin/bash
-echo "hello world zafer Baig and muzammil bilwani"
